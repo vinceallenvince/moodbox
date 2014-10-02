@@ -1,0 +1,16 @@
+{
+  "name": "headroomclient",
+  "version": "0.1.0",
+  "description": "",
+  "repository": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "browserify test/*.js | testling"
+  },
+  "author": "Vince Allen",
+  "license": "ISC",
+  "dependencies": {
+    "request": "~2.44.0",
+    "keypress": "~0.2.1"
+  }
+}
