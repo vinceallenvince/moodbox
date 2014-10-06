@@ -63,7 +63,7 @@ def set_channel(x):
         urllib2.urlopen("http://127.0.0.1:15004/action?action=preset-" + `x`).read()
 
 def set_volume(x):
-    print(scale(x, (0.0, +100.0), (0.0, +65535.0)))
+    print(scale(x, (0.0, +30.0), (0.0, +65535.0)))
 
 def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
