@@ -37,6 +37,14 @@ var options = {
   scriptPath: './'
 };
 
+var pyshell_hello = new PythonShell('./hello.py', options);
+
+pyshell_hello.on('message', function (message) {
+  // received a message sent from the Python script (a simple "print" statement)
+  console.log(message);
+});
+
+
 var pyshell_volume = new PythonShell('./encoder-volume.py', options);
 
 pyshell_volume.on('message', function (message) {
