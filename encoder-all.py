@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import urllib2
+import httplib
 
 GPIO.setmode(GPIO.BCM)
 
@@ -59,7 +59,10 @@ def get_volume_turn():
 y = 0
 
 def set_volume():
-    urllib2.urlopen("http://localhost:15004/action?action=preset-1").read()
+    conn = httplib.HTTPConnection("http://localhost:15004")
+    conn.request("HEAD","/action=preset-1")
+    res = conn.getresponse()
+    print res.status, res.reason
 
 while True:
     change_channel = get_channel_turn()
