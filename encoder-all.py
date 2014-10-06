@@ -65,7 +65,7 @@ def set_channel(x):
 def set_volume(x):
     vol = scale(x, (0.0, +20.0), (0.0, +65535.0))
     print(vol)
-    if vol > 0 && vol < 65535 :
+    if vol > 0 and vol < 65535 :
         urllib2.urlopen("http://127.0.0.1:15004/action?action=volume&level=" + `x`).read()
 
 def scale(val, src, dst):
