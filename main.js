@@ -1,4 +1,4 @@
-var RefSpeaker = require('refspeaker');
+var RefSpeaker = require('./refspeaker');
 var EventEmitter = require('events').EventEmitter;
 var emitter = new EventEmitter();
 
