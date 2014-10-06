@@ -58,17 +58,18 @@ def get_volume_turn():
 
 y = 0
 
-def set_volume():
-    urllib2.urlopen("http://127.0.0.1:15004/action?action=preset-1").read()
+def set_channel(x):
+    urllib2.urlopen("http://127.0.0.1:15004/action?action=preset-" + x).read()
 
 while True:
     change_channel = get_channel_turn()
     if change_channel != 0 :
-      x = x + change_channel
-      print(x)
+        x = x + change_channel
+        print(x)
+        if x % 10 == 0 :
+            set_channel(x/10)
+
     change_volume = get_volume_turn()
     if change_volume != 0 :
       y = y + change_volume
       print(y)
-      if y == 20 :
-        set_volume()
