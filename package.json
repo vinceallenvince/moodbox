@@ -1,5 +1,5 @@
 {
-  "name": "headroomclient",
+  "name": "moodbox",
   "version": "0.1.0",
   "description": "",
   "repository": "",
@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "request": "~2.44.0",
-    "keypress": "~0.2.1"
+    //"keypress": "~0.2.1",
+    "python-shell": "0.0.3"
   }
 }
