@@ -66,7 +66,7 @@ def set_volume(x):
     vol = scale(x, (0.0, +20.0), (0.0, +65535.0))
     print(vol)
     if vol > 0 and vol < 65535 :
-        urllib2.urlopen("http://127.0.0.1:15004/action?action=volume&level=" + `x`).read()
+        urllib2.urlopen("http://127.0.0.1:15004/action?action=volume&level=" + `vol`).read()
 
 def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
