@@ -62,15 +62,22 @@ def set_channel(x):
     if x <= 5:
         urllib2.urlopen("http://127.0.0.1:15004/action?action=preset-" + `x`).read()
 
+def set_volume(x):
+    print(scale(x, (0, 100), (0, 65535)))
+
+def scale(val, src, dst):
+    return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
+
 while True:
     change_channel = get_channel_turn()
     if change_channel != 0 :
         x = x + change_channel
         print(x)
-        if x % 3 == 0 :
-            set_channel(x/3)
+        if x % 5 == 0 :
+            set_channel(x / 5)
 
     change_volume = get_volume_turn()
     if change_volume != 0 :
       y = y + change_volume
       print(y)
+      set_volume(y)
