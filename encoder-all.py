@@ -59,8 +59,8 @@ def get_volume_turn():
 y = 0
 
 def set_volume():
-r = requests.get('http://localhost:15004/action?action=preset-1')
-r.status_code
+    r = requests.get('http://localhost:15004/action?action=preset-1')
+    r.status_code
 
 while True:
     change_channel = get_channel_turn()
