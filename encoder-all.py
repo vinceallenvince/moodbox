@@ -59,10 +59,8 @@ def get_volume_turn():
 y = 0
 
 def set_volume():
-    conn = httplib.HTTPConnection("http://localhost:15004")
-    conn.request("HEAD","/action=preset-1")
-    res = conn.getresponse()
-    print res.status, res.reason
+r = requests.get('http://localhost:15004/action?action=preset-1')
+r.status_code
 
 while True:
     change_channel = get_channel_turn()
