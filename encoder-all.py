@@ -59,7 +59,7 @@ def get_volume_turn():
 y = 0
 
 def set_channel(x):
-    if x <= 5:
+    if x > 0 and x < 6:
         urllib2.urlopen("http://127.0.0.1:15004/action?action=preset-" + `x`).read()
 
 def set_volume(x):
