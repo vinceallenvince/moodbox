@@ -16,8 +16,8 @@ def get_channel_turn():
     # return -1, 0, or +1
     global old_channel_a, old_channel_b
     result = 0
-    new_a = GPIO.input(input_volume_A)
-    new_b = GPIO.input(input_volume_B)
+    new_a = GPIO.input(old_channel_a)
+    new_b = GPIO.input(old_channel_b)
     if new_a != old_channel_a or new_b != old_channel_b :
         if old_channel_a == 0 and new_a == 1 :
             result = (old_channel_b * 2 - 1)
