@@ -26,8 +26,6 @@ old_channel_b = True
 init_channel_val = 3
 
 def get_channel_turn():
-    #if !ready:
-    #    return
     # return -1, 0, or +1
     global old_channel_a, old_channel_b
     result = 0
@@ -58,8 +56,6 @@ old_volume_b = True
 init_volume_val = 32768
 
 def get_volume_turn():
-    #if !ready:
-    #    return
     # return -1, 0, or +1
     global old_volume_a, old_volume_b
     result = 0
@@ -97,8 +93,6 @@ def check_ready():
     # ready = True
 
 while True:
-    #if !ready:
-    #    check_ready()
     change_channel = get_channel_turn()
     if change_channel != 0 :
         x = x + change_channel
