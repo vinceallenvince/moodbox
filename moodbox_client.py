@@ -83,6 +83,7 @@ def set_volume(y):
     if vol > 0 and vol < 65535 :
         global Request
         req = Request("http://127.0.0.1:15004/action?action=volume&level=" + `vol`)
+        urlopen(req)
 
 def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
