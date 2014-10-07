@@ -94,7 +94,7 @@ def check_ready():
     return
 
 while True:
-    if ready == False:
+    if ready == False :
         return
     change_channel = get_channel_turn()
     if change_channel != 0 :
