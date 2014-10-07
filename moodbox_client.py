@@ -83,7 +83,8 @@ y = 0
 def set_channel(x):
     x = x + init_channel_val
     if x > 0 and x < 6:
-        urllib2.urlopen("http://127.0.0.1:15004/action?action=preset-" + `x`).read()
+        req = Request("http://127.0.0.1:15004/action?action=preset-" + `x`)
+        urlopen(req)
 
 def set_volume(y):
     vol = scale(y, (0.0, +20.0), (0.0, +65535.0)) + init_volume_val
@@ -104,7 +105,7 @@ def check_ready():
         except URLError as e:
             if hasattr(e, 'reason'):
                 LED_count += 1
-                if LED_count > 20:
+                if LED_count > 40:
                     LED_state *= -1
                     LED_count = 0
                 if LED_state == 1:
