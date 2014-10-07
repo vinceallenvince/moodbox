@@ -91,6 +91,7 @@ def check_ready():
     # check if refspeaker webserver is running; if so, ready = True
     # need to handle error here when server is not running
     # ready = True
+    return
 
 while True:
     change_channel = get_channel_turn()
