@@ -1,0 +1,11 @@
+Channel manager
+- auth the user
+- serve static page with 'go' button
+- user taps 'go'
+  - get artists based on genre and mood from EN
+  - get tracks based on artist via EN static playlist
+  - update playlist w tracks via Spotify Web API
+  - return success message
+
+- need to shift off previously played track (pickup via refspeaker /status-data)
+  - check if there are no songs left -> get more tracks

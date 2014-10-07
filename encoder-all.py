@@ -13,6 +13,8 @@ GPIO.setup(input_channel_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 old_channel_a = True
 old_channel_b = True
 
+init_channel_val = 3
+
 def get_channel_turn():
     # return -1, 0, or +1
     global old_channel_a, old_channel_b
@@ -41,6 +43,8 @@ GPIO.setup(input_volume_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 old_volume_a = True
 old_volume_b = True
 
+init_volume_val = 32768
+
 def get_volume_turn():
     # return -1, 0, or +1
     global old_volume_a, old_volume_b
@@ -59,11 +63,12 @@ def get_volume_turn():
 y = 0
 
 def set_channel(x):
+    x = x + init_channel_val
     if x > 0 and x < 6:
         urllib2.urlopen("http://127.0.0.1:15004/action?action=preset-" + `x`).read()
 
 def set_volume(x):
-    vol = scale(x, (0.0, +20.0), (0.0, +65535.0))
+    vol = scale(x, (0.0, +20.0), (0.0, +65535.0)) + init_volume_val
     print(vol)
     if vol > 0 and vol < 65535 :
         urllib2.urlopen("http://127.0.0.1:15004/action?action=volume&level=" + `vol`).read()
