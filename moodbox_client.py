@@ -10,6 +10,7 @@ ready = False
 
 LED = 25
 GPIO.setup(LED, GPIO.OUT)
+GPIO.output(LED, False)
 
 def led_on():
     GPIO.output(LED, True)
