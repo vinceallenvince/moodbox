@@ -103,7 +103,7 @@ def check_ready():
         except URLError as e:
             if hasattr(e, 'reason'):
                 LED_count += 1
-                if LED_count % 2 == 0:
+                if LED_count % 20 == 0:
                     led_on()
                 else:
                     led_off()
