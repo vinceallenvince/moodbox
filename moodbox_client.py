@@ -105,8 +105,8 @@ def check_ready():
                 LED_count += 1
                 if LED_count % 2 == 0 :
                     led_on()
-                else:
-                    led_off()
+                    else:
+                        led_off()
                 #print 'We failed to reach a server.'
                 #print 'Reason: ', e.reason
             elif hasattr(e, 'code'):
