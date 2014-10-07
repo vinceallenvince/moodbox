@@ -10,6 +10,7 @@ ready = False
 
 LED = 25
 LED_count = 0
+LED_state = 1
 GPIO.setup(LED, GPIO.OUT)
 GPIO.output(LED, False)
 
@@ -103,10 +104,14 @@ def check_ready():
         except URLError as e:
             if hasattr(e, 'reason'):
                 LED_count += 1
-                if LED_count % 20 == 0:
-                    led_on()
+                if LED_count > 20:
+                    LED_state *= -1
+                    LED_count = 0
+                if LED_state == 1:
+                    led_on
                 else:
-                    led_off()
+                    led_off
+
                 #print 'We failed to reach a server.'
                 #print 'Reason: ', e.reason
             elif hasattr(e, 'code'):
