@@ -102,15 +102,17 @@ def check_ready():
             response = urlopen(req)
         except URLError as e:
             if hasattr(e, 'reason'):
-
+                LED_count += 1
                 if LED_count % 2 == 0:
                     led_on()
-
+                else:
+                    led_off()
                 #print 'We failed to reach a server.'
                 #print 'Reason: ', e.reason
             elif hasattr(e, 'code'):
                 #print 'The server couldn\'t fulfill the request.'
                 #print 'Error code: ', e.code
+                pass
         else:
             # everything is fine
             ready = True
