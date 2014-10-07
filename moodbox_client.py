@@ -92,6 +92,8 @@ def check_ready():
     # need to handle error here when server is not running
     # ready = True
     #
+
+    global ready
     if ready == False :
         req = urllib2.Request("http://127.0.0.1:15004/status-data")
         try:
