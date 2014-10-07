@@ -91,20 +91,23 @@ def check_ready():
     # check if refspeaker webserver is running; if so, ready = True
     # need to handle error here when server is not running
     # ready = True
-    return
+    pass
 
-while True:
-    if ready == False :
-        return
-    change_channel = get_channel_turn()
-    if change_channel != 0 :
-        x = x + change_channel
-        print(x)
-        if x % 5 == 0 :
-            set_channel(x / 5)
+def start():
+    while True:
+        if ready == False :
+            return
+        change_channel = get_channel_turn()
+        if change_channel != 0 :
+            x = x + change_channel
+            print(x)
+            if x % 5 == 0 :
+                set_channel(x / 5)
 
-    change_volume = get_volume_turn()
-    if change_volume != 0 :
-      y = y + change_volume
-      print(y)
-      set_volume(y)
+        change_volume = get_volume_turn()
+        if change_volume != 0 :
+          y = y + change_volume
+          print(y)
+          set_volume(y)
+
+start()
