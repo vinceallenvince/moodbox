@@ -10,7 +10,12 @@ ready = False
 
 LED = 25
 GPIO.setup(LED, GPIO.OUT)
-GPIO.output(LED, True)
+
+def led_on():
+    GPIO.output(LED, True)
+
+def led_off():
+    GPIO.output(LED, False)
 
 ###################
 
@@ -88,12 +93,6 @@ def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
 
 def check_ready():
-    # response = urllib2.urlopen("http://127.0.0.1:15004/status-data")
-    # check if refspeaker webserver is running; if so, ready = True
-    # need to handle error here when server is not running
-    # ready = True
-    #
-
     global ready, Request, URLError
     if ready == False :
         req = Request("http://127.0.0.1:15004/status-data")
@@ -109,6 +108,7 @@ def check_ready():
         else:
             # everything is fine
             ready = True
+            led_on()
             set_volume(5) # range is -10 -> 10
 
 
