@@ -108,9 +108,9 @@ def check_ready():
                     LED_state *= -1
                     LED_count = 0
                 if LED_state == 1:
-                    led_on
+                    led_on()
                 else:
-                    led_off
+                    led_off()
 
                 #print 'We failed to reach a server.'
                 #print 'Reason: ', e.reason
