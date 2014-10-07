@@ -109,22 +109,22 @@ def check_ready():
             # everything is fine
             ready = True
 
-def start():
-    while True:
-        if ready == True :
-            change_channel = get_channel_turn()
-            if change_channel != 0 :
-                x = x + change_channel
-                print(x)
-                if x % 5 == 0 :
-                    set_channel(x / 5)
 
-            change_volume = get_volume_turn()
-            if change_volume != 0 :
-              y = y + change_volume
-              print(y)
-              set_volume(y)
-        else:
-            check_ready()
+while True:
+    if ready == True :
+        change_channel = get_channel_turn()
+        if change_channel != 0 :
+            x = x + change_channel
+            print(x)
+            if x % 5 == 0 :
+                set_channel(x / 5)
 
-start()
+        change_volume = get_volume_turn()
+        if change_volume != 0 :
+          y = y + change_volume
+          print(y)
+          set_volume(y)
+    else:
+        check_ready()
+
+
