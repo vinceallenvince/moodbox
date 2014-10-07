@@ -87,11 +87,25 @@ def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
 
 def check_ready():
-    # urllib2.urlopen("http://127.0.0.1:15004/status-data").read()
+    # response = urllib2.urlopen("http://127.0.0.1:15004/status-data")
     # check if refspeaker webserver is running; if so, ready = True
     # need to handle error here when server is not running
     # ready = True
-    pass
+    #
+    if ready == False :
+        req = urllib2.Request("http://127.0.0.1:15004/status-data")
+        try:
+            response = urlopen(req)
+        except URLError as e:
+            if hasattr(e, 'reason'):
+                print 'We failed to reach a server.'
+                print 'Reason: ', e.reason
+            elif hasattr(e, 'code'):
+                print 'The server couldn\'t fulfill the request.'
+                print 'Error code: ', e.code
+        else:
+            # everything is fine
+            ready = True
 
 def start():
     while True:
