@@ -95,7 +95,7 @@ def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
 
 def check_ready():
-    global ready, Request, URLError
+    global ready, LED_count, Request, URLError
     if ready == False :
         req = Request("http://127.0.0.1:15004/status-data")
         try:
