@@ -93,9 +93,9 @@ def check_ready():
     # ready = True
     #
 
-    global ready, urllib2, URLError
+    global ready, Request, URLError
     if ready == False :
-        req = urllib2.Request("http://127.0.0.1:15004/status-data")
+        req = Request("http://127.0.0.1:15004/status-data")
         try:
             response = urlopen(req)
         except URLError as e:
