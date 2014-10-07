@@ -4,6 +4,16 @@ import urllib2
 
 GPIO.setmode(GPIO.BCM)
 
+ready = False
+
+###################
+
+LED = 25
+GPIO.setup(LED, GPIO.OUT)
+GPIO.output(LED, True)
+
+###################
+
 input_channel_A = 12
 input_channel_B = 16
 
@@ -16,6 +26,8 @@ old_channel_b = True
 init_channel_val = 3
 
 def get_channel_turn():
+    #if !ready:
+    #    return
     # return -1, 0, or +1
     global old_channel_a, old_channel_b
     result = 0
@@ -46,6 +58,8 @@ old_volume_b = True
 init_volume_val = 32768
 
 def get_volume_turn():
+    #if !ready:
+    #    return
     # return -1, 0, or +1
     global old_volume_a, old_volume_b
     result = 0
@@ -76,7 +90,15 @@ def set_volume(x):
 def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
 
+def check_ready():
+    # urllib2.urlopen("http://127.0.0.1:15004/status-data").read()
+    # check if refspeaker webserver is running; if so, ready = True
+    # need to handle error here when server is not running
+    # ready = True
+
 while True:
+    #if !ready:
+    #    check_ready()
     change_channel = get_channel_turn()
     if change_channel != 0 :
         x = x + change_channel
