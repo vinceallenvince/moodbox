@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import urllib2
+from urllib2 import Request, urlopen, URLError
 
 GPIO.setmode(GPIO.BCM)
 
