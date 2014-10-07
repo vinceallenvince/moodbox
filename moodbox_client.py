@@ -109,7 +109,7 @@ def check_ready():
         else:
             # everything is fine
             ready = True
-            set_volume(init_volume_val)
+            set_volume(10)
 
 
 while True:
