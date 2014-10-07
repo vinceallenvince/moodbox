@@ -77,11 +77,12 @@ def set_channel(x):
     if x > 0 and x < 6:
         urllib2.urlopen("http://127.0.0.1:15004/action?action=preset-" + `x`).read()
 
-def set_volume(x):
-    vol = scale(x, (0.0, +20.0), (0.0, +65535.0)) + init_volume_val
+def set_volume(y):
+    vol = scale(y, (0.0, +20.0), (0.0, +65535.0)) + init_volume_val
     print(vol)
     if vol > 0 and vol < 65535 :
-        urllib2.urlopen("http://127.0.0.1:15004/action?action=volume&level=" + `vol`).read()
+        global Request
+        req = Request("http://127.0.0.1:15004/action?action=volume&level=" + `vol`)
 
 def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
