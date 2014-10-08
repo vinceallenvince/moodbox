@@ -179,7 +179,7 @@ while True:
 
         # check status on an interval
         status_check_count += 1
-        if (status_check_count > status_check_max) {
+        if status_check_count > status_check_max {
             status_check_count = 0
             check_status()
         }
