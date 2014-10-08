@@ -125,6 +125,8 @@ def check_status():
         if fetching_new_tracks == False :
             print "No next tracks!"
             push_playlist(current_channel)
+    else:
+        fetching_new_tracks == False
 
 def shift_playlist(title_uri, current_channel):
     print "Removing track " + title_uri.encode("ascii") + " from moodbox-ch" + str(current_channel) + "."
