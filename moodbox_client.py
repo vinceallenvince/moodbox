@@ -121,9 +121,9 @@ def check_status():
         title_uri = json_data["title_uri"]
 
     print "next_title"
-    print json_data.get("next_title")
+    nxt = json_data.get("next_title")
 
-    if json_data.next_title == "":
+    if nxt == "":
         print "No next tracks!"
         #push_playlist(current_channel)
 
