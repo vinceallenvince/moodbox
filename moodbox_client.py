@@ -123,8 +123,8 @@ def check_status():
         #push_playlist(current_index)
 
 def shift_playlist(title_uri, current_index):
-    print title_uri
-    req = Request(base_server_uri + "/shiftplaylist?uri=" + title_uri.str() + "&index=" + current_index)
+    print title_uri.encode("ascii")
+    req = Request(base_server_uri + "/shiftplaylist?uri=" + title_uri.encode("ascii") + "&index=" + current_index)
     response = urlopen(req)
 
 def push_playlist(current_index):
