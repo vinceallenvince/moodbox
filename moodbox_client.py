@@ -124,7 +124,7 @@ def check_status():
         #push_playlist(current_channel)
 
 def shift_playlist(title_uri, current_channel):
-    print title_uri.encode("ascii")
+    print "Removing track " + title_uri.encode("ascii") + "from moodbox-ch" + str(current_channel) + "."
     req = Request(base_server_uri + "/shiftplaylist?uri=" + title_uri.encode("ascii") + "&channel=" + str(current_channel))
     response = urlopen(req)
 
