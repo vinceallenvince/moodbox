@@ -125,6 +125,8 @@ def check_status():
         if fetching_new_tracks == False :
             print "Fetching new tracks!"
             push_playlist(current_channel)
+        else:
+            set_channel(current_channel)
     else:
         fetching_new_tracks == False
 
