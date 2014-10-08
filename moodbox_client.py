@@ -12,6 +12,7 @@ title_uri = False
 current_channel = False
 status_check_count = 0
 status_check_max = 200
+fetching_new_tracks = False
 
 ###################
 
@@ -120,21 +121,21 @@ def check_status():
         shift_playlist(title_uri, current_channel)
         title_uri = json_data["title_uri"]
 
-    print "next_title"
-    print json_data.get("next_title")
-
     if json_data.get("next_title") == "":
-        print "No next tracks!"
-        #push_playlist(current_channel)
+        if fetching_new_tracks == False :
+            print "No next tracks!"
+            push_playlist(current_channel)
 
 def shift_playlist(title_uri, current_channel):
     print "Removing track " + title_uri.encode("ascii") + " from moodbox-ch" + str(current_channel) + "."
-    req = Request(base_server_uri + "/shiftplaylist?uri=" + title_uri.encode("ascii") + "&channel=" + str(current_channel))
+    req = Request(base_server_uri + "/shiftplaylist?uri=" + title_uri.encode("ascii") + "&num=" + str(current_channel))
     response = urlopen(req)
 
 def push_playlist(current_channel):
-    req = Request(base_server_uri + "/pushplaylist?index=" + str(current_channel))
+    global fetching_new_tracks
+    req = Request(base_server_uri + "/pushplaylist?num=" + str(current_channel))
     response = urlopen(req)
+    fetching_new_tracks = True
 
 def check_ready():
     global ready, LED_count, LED_state, Request, URLError
