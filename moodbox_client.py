@@ -116,17 +116,18 @@ def check_status():
     data = response.read()
     json_data = json.loads(data)
 
-    if title_uri == False: # this is the first track
-        title_uri = json_data["title_uri"]
-    elif title_uri != json_data["title_uri"] : # playing a new track; remove the old
-        shift_playlist(title_uri, current_channel)
-        title_uri = json_data["title_uri"]
-
-    if json_data.get("playing") == "0" and title_uri != False:
+    if json_data.get("playing") == "0":
         if fetching_new_tracks == False :
             print "Fetching new tracks!"
             fetching_new_tracks = True
             push_playlist(current_channel)
+    else:
+        if title_uri == False: # this is the first track
+            title_uri = json_data["title_uri"]
+        elif title_uri != json_data["title_uri"] : # playing a new track; remove the old
+            shift_playlist(title_uri, current_channel)
+            title_uri = json_data["title_uri"]
+    #TODO: if we're getting new tracks, we don't need to remove the last track
 
 def shift_playlist(title_uri, current_channel):
     print "Removing track " + title_uri.encode("ascii") + " from moodbox-ch" + str(current_channel) + "."
