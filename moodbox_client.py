@@ -88,6 +88,7 @@ def get_volume_turn():
 y = 0
 
 def set_channel(x):
+    global current_index
     x = x + init_channel_val
     if x > 0 and x < 6:
         current_index = x;
