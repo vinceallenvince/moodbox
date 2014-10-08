@@ -9,7 +9,7 @@ ready = False
 base_client_uri = "http://127.0.0.1:15004"
 base_server_uri = "http://162.243.120.32:8888"
 title_uri = False
-current_index = False
+current_channel = False
 status_check_count = 0
 status_check_max = 200
 
@@ -88,10 +88,10 @@ def get_volume_turn():
 y = 0
 
 def set_channel(x):
-    global current_index
+    global current_channel
     x = x + init_channel_val
     if x > 0 and x < 6:
-        current_index = x;
+        current_channel = x;
         req = Request(base_client_uri + "/action?action=preset-" + `x`)
         urlopen(req)
 
@@ -117,19 +117,19 @@ def check_status():
     if title_uri == False: # this is the first track
         title_uri = json_data["title_uri"]
     elif title_uri != json_data["title_uri"] : # playing a new track; remove the old
-        shift_playlist(title_uri, current_index)
+        shift_playlist(title_uri, current_channel)
         title_uri = json_data["title_uri"]
 
     #if json_data.next_title == '':
-        #push_playlist(current_index)
+        #push_playlist(current_channel)
 
-def shift_playlist(title_uri, current_index):
+def shift_playlist(title_uri, current_channel):
     print title_uri.encode("ascii")
-    req = Request(base_server_uri + "/shiftplaylist?uri=" + title_uri.encode("ascii") + "&index=" + str(current_index))
+    req = Request(base_server_uri + "/shiftplaylist?uri=" + title_uri.encode("ascii") + "&channel=" + str(current_channel))
     response = urlopen(req)
 
-def push_playlist(current_index):
-    req = Request(base_server_uri + "/pushplaylist?index=" + str(current_index))
+def push_playlist(current_channel):
+    req = Request(base_server_uri + "/pushplaylist?index=" + str(current_channel))
     response = urlopen(req)
 
 def check_ready():
