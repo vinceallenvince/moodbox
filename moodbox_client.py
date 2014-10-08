@@ -110,23 +110,15 @@ def check_status():
     response = urlopen(req)
     data = response.read()
     json_data = json.loads(data)
+    print json_data
+    #if json_data.title_uri:
+        #if title_uri == False: # this is the first track
+            #title_uri = json_data.title_uri
+        #elif title_uri != json_data.title_uri: # playing a new track; remove the old
+            #shift_playlist(title_uri, current_index)
 
-    if json_data.title_uri:
-        if title_uri == False: # this is the first track
-            title_uri = json_data.title_uri
-        elif title_uri != json_data.title_uri: # playing a new track; remove the old
-            shift_playlist(title_uri, current_index)
-
-    # get title_uri
-    # if not title_uri
-    # shift_playlist(title_uri, current_index)
-    #
-    # should also check if no next tracks
-    # if so, need new tracks for this channel
-    # push_playlist(current_index)
-
-    if json_data.next_title == '':
-        push_playlist(current_index)
+    #if json_data.next_title == '':
+        #push_playlist(current_index)
 
 def shift_playlist(title_uri, current_index):
     req = Request(base_server_uri + "/shiftplaylist?uri=" + title_uri + "&index=" + current_index)
