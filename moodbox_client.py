@@ -120,7 +120,8 @@ def check_status():
         shift_playlist(title_uri, current_channel)
         title_uri = json_data["title_uri"]
 
-    print "next_title" in json_data
+    print "next_title"
+    print json_data.next_title
 
     if json_data.next_title == "":
         print "No next tracks!"
