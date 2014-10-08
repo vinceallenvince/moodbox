@@ -168,7 +168,7 @@ def check_ready():
             ready = True
             led_on()
             set_volume(5) # range is -10 -> 10
-            set_channel(0) # range is -2 -> 2
+            set_channel(-1) # range is -2 -> 2
 
 
 while True:
