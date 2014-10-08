@@ -109,7 +109,7 @@ def scale(val, src, dst):
 
 def check_status():
 
-    global title_uri, x
+    global title_uri, fetching_new_tracks, x
 
     req = Request(base_client_uri + "/status-data")
     response = urlopen(req)
@@ -124,11 +124,12 @@ def check_status():
     if json_data.get("playing") == "0" and title_uri != False:
         if fetching_new_tracks == False :
             print "Fetching new tracks!"
+            fetching_new_tracks = True
             push_playlist(current_channel)
         else:
             pass
     else:
-        fetching_new_tracks == False
+        pass #fetching_new_tracks == False
 
 def shift_playlist(title_uri, current_channel):
     print "Removing track " + title_uri.encode("ascii") + " from moodbox-ch" + str(current_channel) + "."
@@ -136,10 +137,9 @@ def shift_playlist(title_uri, current_channel):
     response = urlopen(req)
 
 def push_playlist(current_channel):
-    global fetching_new_tracks
     req = Request(base_server_uri + "/pushplaylist?num=" + str(current_channel))
     response = urlopen(req)
-    fetching_new_tracks = True
+    console.log(response);
 
 def check_ready():
     global ready, LED_count, LED_state, Request, URLError
