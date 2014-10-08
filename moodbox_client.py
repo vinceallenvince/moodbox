@@ -110,7 +110,7 @@ def check_status():
     response = urlopen(req)
     data = response.read()
     json_data = json.loads(data)
-    print json_data
+    print json_data["title_uri"]
     #if json_data.title_uri:
         #if title_uri == False: # this is the first track
             #title_uri = json_data.title_uri
