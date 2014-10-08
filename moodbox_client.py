@@ -121,12 +121,12 @@ def check_status():
         shift_playlist(title_uri, current_channel)
         title_uri = json_data["title_uri"]
 
-    if json_data.get("playing") == "0":
+    if json_data.get("playing") == "0" and title_uri != False:
         if fetching_new_tracks == False :
             print "Fetching new tracks!"
             push_playlist(current_channel)
         else:
-            set_channel(x / 3)
+            pass
     else:
         fetching_new_tracks == False
 
