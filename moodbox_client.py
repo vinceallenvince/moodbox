@@ -121,7 +121,7 @@ def check_status():
         title_uri = json_data["title_uri"]
 
     print "next_title"
-    print json_data.next_title
+    print json_data.get("next_title")
 
     if json_data.next_title == "":
         print "No next tracks!"
