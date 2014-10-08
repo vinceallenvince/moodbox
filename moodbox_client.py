@@ -139,7 +139,8 @@ def shift_playlist(title_uri, current_channel):
 def push_playlist(current_channel):
     req = Request(base_server_uri + "/pushplaylist?num=" + str(current_channel))
     response = urlopen(req)
-    print response;
+    set_channel(x / 3)
+    fetching_new_tracks == False
 
 def check_ready():
     global ready, LED_count, LED_state, Request, URLError
