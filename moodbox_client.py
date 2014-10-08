@@ -88,6 +88,10 @@ def get_volume_turn():
 
 y = 0
 
+def play():
+    req = Request(base_client_uri + "/action?action=play")
+    urlopen(req)
+
 def set_channel(x):
     global current_channel
     x = x + init_channel_val
@@ -138,6 +142,7 @@ def push_playlist(current_channel):
     req = Request(base_server_uri + "/pushplaylist?num=" + str(current_channel))
     response = urlopen(req)
     set_channel(x / 3)
+    play()
     fetching_new_tracks == False
 
 def check_ready():
@@ -168,7 +173,7 @@ def check_ready():
             led_on()
             set_volume(5) # range is -10 -> 10
             set_channel(0) # range is -2 -> 2
-
+            play()
 
 while True:
     if ready == True :
