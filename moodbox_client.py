@@ -121,12 +121,14 @@ def check_status():
         shift_playlist(title_uri, current_channel)
         title_uri = json_data["title_uri"]
 
-    if json_data.get("next_title") == "":
-        if fetching_new_tracks == False :
-            print "No next tracks!"
-            push_playlist(current_channel)
-    else:
-        fetching_new_tracks == False
+    print "playing: " + json_data.get("playing")
+
+    #if json_data.get("next_title") == "":
+        #if fetching_new_tracks == False :
+            #print "Fetching new tracks!"
+            #push_playlist(current_channel)
+    #else:
+        #fetching_new_tracks == False
 
 def shift_playlist(title_uri, current_channel):
     print "Removing track " + title_uri.encode("ascii") + " from moodbox-ch" + str(current_channel) + "."
