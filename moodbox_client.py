@@ -8,7 +8,7 @@ GPIO.setmode(GPIO.BCM)
 ready = False
 base_client_uri = "http://127.0.0.1:15004"
 base_server_uri = "http://162.243.120.32:8888"
-title_uri = ''
+title_uri = False
 current_index = False
 status_check_count = 0
 status_check_max = 200
@@ -114,11 +114,10 @@ def check_status():
     response = urlopen(req)
     data = response.read()
     json_data = json.loads(data)
-    if json_data["title_uri"] != "":
-        if title_uri == False: # this is the first track
-            title_uri = json_data["title_uri"]
-        elif title_uri != json_data["title_uri"] : # playing a new track; remove the old
-            shift_playlist(title_uri, current_index)
+    if title_uri == False: # this is the first track
+        title_uri = json_data["title_uri"]
+    elif title_uri != json_data["title_uri"] : # playing a new track; remove the old
+        shift_playlist(title_uri, current_index)
 
     #if json_data.next_title == '':
         #push_playlist(current_index)
