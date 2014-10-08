@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 from urllib2 import Request, urlopen, URLError
+import json
 
 GPIO.setmode(GPIO.BCM)
 
@@ -108,11 +109,12 @@ def check_status():
     req = Request(base_client_uri + "/status-data")
     response = urlopen(req)
     data = response.read()
+    json_data = json.loads(data)
 
-    if data.title_uri:
+    if json_data.title_uri:
         if title_uri == False: # this is the first track
-            title_uri = data.title_uri
-        elif title_uri != data.title_uri: # playing a new track; remove the old
+            title_uri = json_data.title_uri
+        elif title_uri != json_data.title_uri: # playing a new track; remove the old
             shift_playlist(title_uri, current_index)
 
     # get title_uri
@@ -123,7 +125,7 @@ def check_status():
     # if so, need new tracks for this channel
     # push_playlist(current_index)
 
-    if data.next_title == '':
+    if json_data.next_title == '':
         push_playlist(current_index)
 
 def shift_playlist(title_uri, current_index):
