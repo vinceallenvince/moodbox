@@ -115,6 +115,7 @@ def check_status():
     response = urlopen(req)
     data = response.read()
     json_data = json.loads(data)
+
     if title_uri == False: # this is the first track
         title_uri = json_data["title_uri"]
     elif title_uri != json_data["title_uri"] : # playing a new track; remove the old
@@ -126,10 +127,6 @@ def check_status():
             print "Fetching new tracks!"
             fetching_new_tracks = True
             push_playlist(current_channel)
-        else:
-            pass
-    else:
-        pass #fetching_new_tracks == False
 
 def shift_playlist(title_uri, current_channel):
     print "Removing track " + title_uri.encode("ascii") + " from moodbox-ch" + str(current_channel) + "."
@@ -169,7 +166,7 @@ def check_ready():
             ready = True
             led_on()
             set_volume(5) # range is -10 -> 10
-            set_channel(-1) # range is -2 -> 2
+            set_channel(0) # range is -2 -> 2
 
 
 while True:
