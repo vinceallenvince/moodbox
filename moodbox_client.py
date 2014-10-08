@@ -96,6 +96,11 @@ def set_volume(y):
 def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
 
+def check_status():
+    req = Request("http://127.0.0.1:15004/status-data")
+    response = urlopen(req)
+    print response.read()
+
 def check_ready():
     global ready, LED_count, LED_state, Request, URLError
     if ready == False :
@@ -125,6 +130,7 @@ def check_ready():
             led_on()
             set_volume(5) # range is -10 -> 10
             set_channel(0)
+            check_status()
 
 
 while True:
