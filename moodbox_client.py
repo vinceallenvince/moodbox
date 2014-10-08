@@ -8,7 +8,7 @@ GPIO.setmode(GPIO.BCM)
 ready = False
 base_client_uri = "http://127.0.0.1:15004"
 base_server_uri = "http://162.243.120.32:8888"
-title_uri = False
+title_uri = ''
 current_index = False
 status_check_count = 0
 status_check_max = 200
@@ -124,7 +124,7 @@ def check_status():
         #push_playlist(current_index)
 
 def shift_playlist(title_uri, current_index):
-    print title_uri.encode("ascii")
+    print current_index
     req = Request(base_server_uri + "/shiftplaylist?uri=" + title_uri.encode("ascii") + "&index=" + str(current_index))
     response = urlopen(req)
 
