@@ -109,7 +109,7 @@ def scale(val, src, dst):
 
 def check_status():
 
-    global title_uri
+    global title_uri, x
 
     req = Request(base_client_uri + "/status-data")
     response = urlopen(req)
@@ -126,7 +126,7 @@ def check_status():
             print "Fetching new tracks!"
             push_playlist(current_channel)
         else:
-            set_channel(current_channel)
+            set_channel(x / 3)
     else:
         fetching_new_tracks == False
 
