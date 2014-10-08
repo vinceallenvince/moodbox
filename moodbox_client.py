@@ -5,6 +5,12 @@ from urllib2 import Request, urlopen, URLError
 GPIO.setmode(GPIO.BCM)
 
 ready = False
+base_client_uri = "http://127.0.0.1:15004"
+base_server_uri = "http://162.243.120.32:8888"
+title_uri = False
+current_index = False
+status_check_count = 0
+status_check_max = 100
 
 ###################
 
@@ -83,32 +89,59 @@ y = 0
 def set_channel(x):
     x = x + init_channel_val
     if x > 0 and x < 6:
-        req = Request("http://127.0.0.1:15004/action?action=preset-" + `x`)
+        current_index = x;
+        req = Request(base_client_uri + "/action?action=preset-" + `x`)
         urlopen(req)
 
 def set_volume(y):
     vol = scale(y, (0.0, +20.0), (0.0, +65535.0)) + init_volume_val
     print(vol)
     if vol > 0 and vol < 65535 :
-        req = Request("http://127.0.0.1:15004/action?action=volume&level=" + `vol`)
+        req = Request(base_client_uri + "/action?action=volume&level=" + `vol`)
         urlopen(req)
+    # if volume = 0; pause playback
 
 def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
 
 def check_status():
-    req = Request("http://127.0.0.1:15004/status-data")
+    req = Request(base_client_uri + "/status-data")
     response = urlopen(req)
-    print response.read()
+    data = response.read()
+
+    if data.title_uri:
+        if title_uri == False: # this is the first track
+            title_uri = data.title_uri
+        elif title_uri != data.title_uri: # playing a new track; remove the old
+            shift_playlist(title_uri, current_index)
+
+    # get title_uri
+    # if not title_uri
+    # shift_playlist(title_uri, current_index)
+    #
+    # should also check if no next tracks
+    # if so, need new tracks for this channel
+    # push_playlist(current_index)
+
+    if data.next_title == '':
+        push_playlist(current_index)
+
+def shift_playlist(title_uri, current_index):
+    req = Request(base_server_uri + "/shiftplaylist?uri=" + title_uri + "&index=" + current_index)
+    response = urlopen(req)
+
+def push_playlist(current_index):
+    req = Request(base_server_uri + "/pushplaylist?index=" + current_index)
+    response = urlopen(req)
 
 def check_ready():
     global ready, LED_count, LED_state, Request, URLError
     if ready == False :
-        req = Request("http://127.0.0.1:15004/status-data")
+        req = Request(base_client_uri + "/status-data")
         try:
             response = urlopen(req)
         except URLError as e:
-            if hasattr(e, 'reason'):
+            if hasattr(e, "reason"):
                 LED_count += 1
                 if LED_count > 40:
                     LED_state *= -1
@@ -117,10 +150,9 @@ def check_ready():
                     led_on()
                 else:
                     led_off()
-
                 #print 'We failed to reach a server.'
                 #print 'Reason: ', e.reason
-            elif hasattr(e, 'code'):
+            elif hasattr(e, "code"):
                 #print 'The server couldn\'t fulfill the request.'
                 #print 'Error code: ', e.code
                 pass
@@ -129,8 +161,7 @@ def check_ready():
             ready = True
             led_on()
             set_volume(5) # range is -10 -> 10
-            set_channel(0)
-            check_status()
+            set_channel(0) # range is -2 -> 2
 
 
 while True:
@@ -138,13 +169,21 @@ while True:
         change_channel = get_channel_turn()
         if change_channel != 0 :
             x = x + change_channel
-            if x % 5 == 0 :
-                set_channel(x / 5)
+            if x % 3 == 0 :
+                set_channel(x / 3)
 
         change_volume = get_volume_turn()
         if change_volume != 0 :
           y = y + change_volume
           set_volume(y)
+
+        # check status on an interval
+        status_check_count += 1
+        if (status_check_count > status_check_max) {
+            status_check_count = 0
+            check_status()
+        }
+
     else:
         check_ready()
 
