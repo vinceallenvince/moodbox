@@ -118,6 +118,7 @@ def check_status():
         title_uri = json_data["title_uri"]
     elif title_uri != json_data["title_uri"] : # playing a new track; remove the old
         shift_playlist(title_uri, current_index)
+        title_uri = json_data["title_uri"]
 
     #if json_data.next_title == '':
         #push_playlist(current_index)
