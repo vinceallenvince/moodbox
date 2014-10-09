@@ -101,7 +101,7 @@ def set_channel(x):
         urlopen(req)
 
 def set_volume(y):
-    vol = scale(y, (0.0, +20.0), (0.0, +65535.0)) + init_volume_val
+    vol = scale(y, (0.0, +10.0), (0.0, +65535.0)) + init_volume_val
     print(vol)
     if vol > 0 and vol < 65535 :
         req = Request(base_client_uri + "/action?action=volume&level=" + `vol`)
@@ -171,7 +171,7 @@ def check_ready():
             # everything is fine
             ready = True
             led_on()
-            set_volume(5) # range is -10 -> 10
+            set_volume(3) # range is -5 -> 5
             set_channel(0) # range is -2 -> 2
             play()
 
