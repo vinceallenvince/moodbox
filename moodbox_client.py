@@ -204,7 +204,7 @@ while True:
         shutdown_state = GPIO.input(button_shutdown)
         if shutdown_state == False:
             print('shutdown button Pressed')
-            shutdown_pi()
+            #shutdown_pi()
             time.sleep(0.2)
 
     else:
