@@ -17,7 +17,7 @@ fetching_new_tracks = False
 
 ###################
 
-LED = 26
+LED = 23
 LED_count = 0
 LED_state = 1
 GPIO.setup(LED, GPIO.OUT)
@@ -204,7 +204,7 @@ while True:
         shutdown_state = GPIO.input(button_shutdown)
         if shutdown_state == False:
             print('shutdown button Pressed')
-            #shutdown_pi()
+            shutdown_pi()
             time.sleep(0.2)
 
     else:
