@@ -21,7 +21,7 @@ LED = 23
 LED_count = 0
 LED_state = 1
 GPIO.setup(LED, GPIO.OUT)
-GPIO.output(LED, False)
+GPIO.output(LED, True)
 
 def led_on():
     GPIO.output(LED, True)
