@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import time
 from urllib2 import Request, urlopen, URLError
 import json
+from subprocess import call
 
 GPIO.setmode(GPIO.BCM)
 
@@ -40,6 +41,9 @@ old_channel_a = True
 old_channel_b = True
 
 init_channel_val = 3
+
+button_shutdown = 5
+GPIO.setup(button_shutdown, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 def get_channel_turn():
     # return -1, 0, or +1
@@ -145,6 +149,9 @@ def push_playlist(current_channel):
     play()
     fetching_new_tracks == False
 
+def shutdown_pi():
+    call(["/home/pi/shutdown.sh"])
+
 def check_ready():
     global ready, LED_count, LED_state, Request, URLError
     if ready == False :
@@ -193,6 +200,12 @@ while True:
         if status_check_count > status_check_max :
             status_check_count = 0
             check_status()
+
+        shutdown_state = GPIO.input(button_shutdown)
+        if shutdown_state == False:
+            print('shutdown button Pressed')
+            shutdown_pi()
+            time.sleep(0.2)
 
     else:
         check_ready()
