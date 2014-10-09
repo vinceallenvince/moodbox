@@ -17,7 +17,7 @@ fetching_new_tracks = False
 
 ###################
 
-LED = 25
+LED = 26
 LED_count = 0
 LED_state = 1
 GPIO.setup(LED, GPIO.OUT)
@@ -64,8 +64,8 @@ x = 0
 
 ###################
 
-input_volume_A = 18
-input_volume_B = 23
+input_volume_A = 13
+input_volume_B = 21
 
 GPIO.setup(input_volume_A, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(input_volume_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
