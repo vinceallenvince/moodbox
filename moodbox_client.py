@@ -108,7 +108,9 @@ def set_volume(y):
     vol = scale(y, (0.0, +10.0), (0.0, +100.0)) + init_volume_val
     call("amixer set PCM " + `vol` + "%", shell=True)
 
-
+def set_max_connect_volume():
+    req = Request(base_client_uri + "/action?action=volume&level=65535")
+    urlopen(req)
 
 def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
@@ -176,6 +178,7 @@ def check_ready():
             # everything is fine
             ready = True
             led_on()
+            set_max_connect_volume() # max the Spotify connect volume
             set_volume(0)
             set_channel(0) # range is -2 -> 2
             play()
