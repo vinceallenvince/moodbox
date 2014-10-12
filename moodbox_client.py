@@ -73,7 +73,7 @@ GPIO.setup(input_volume_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 old_volume_a = True
 old_volume_b = True
 
-init_volume_val = 32768
+init_volume_val = 50
 
 def get_volume_turn():
     # return -1, 0, or +1
@@ -105,12 +105,18 @@ def set_channel(x):
         urlopen(req)
 
 def set_volume(y):
+    '''
     vol = scale(y, (0.0, +10.0), (0.0, +65535.0)) + init_volume_val
     print(vol)
     if vol > 0 and vol < 65535 :
         req = Request(base_client_uri + "/action?action=volume&level=" + `vol`)
         urlopen(req)
     # if volume = 0; pause playback
+    '''
+    vol = scale(y, (0.0, +10.0), (0.0, +100.0)) + init_volume_val
+    call(["amixer -c 0 set Master " + `vol` + "%"])
+
+
 
 def scale(val, src, dst):
     return ((val - src[0]) / (src[1]-src[0])) * (dst[1]-dst[0]) + dst[0]
