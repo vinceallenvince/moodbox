@@ -73,7 +73,7 @@ GPIO.setup(input_volume_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 old_volume_a = True
 old_volume_b = True
 
-init_volume_val = 70
+init_volume_val = 20
 
 def get_volume_turn():
     # return -1, 0, or +1
@@ -106,7 +106,8 @@ def set_channel(x):
 
 def set_volume(y):
     vol = scale(y, (0.0, +10.0), (+50.0, +100.0)) + init_volume_val
-    call("amixer set PCM " + `vol` + "%", shell=True)
+    if vol <= 100:
+        call("amixer set PCM " + `vol` + "%", shell=True)
 
 def set_max_connect_volume():
     req = Request(base_client_uri + "/action?action=volume&level=65535")
