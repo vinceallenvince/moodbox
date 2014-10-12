@@ -105,7 +105,7 @@ def set_channel(x):
         urlopen(req)
 
 def set_volume(y):
-    vol = scale(y, (0.0, +10.0), (0.0, +100.0)) + init_volume_val
+    vol = scale(y, (0.0, +10.0), (+50.0, +100.0)) + init_volume_val
     call("amixer set PCM " + `vol` + "%", shell=True)
 
 def set_max_connect_volume():
