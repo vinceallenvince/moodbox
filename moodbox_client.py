@@ -73,7 +73,7 @@ GPIO.setup(input_volume_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 old_volume_a = True
 old_volume_b = True
 
-init_volume_val = 20
+init_volume_val = 25
 
 def get_volume_turn():
     # return -1, 0, or +1
