@@ -112,7 +112,7 @@ def set_channel(x):
         urlopen(req)
 
 def set_volume(y):
-    if y >= -15 or y <= 15:
+    if y >= -10 or y <= 10:
     	vol = scale(y, (-15.0, +15.0), (+0.0, +100.0))
         call("amixer set PCM " + `vol` + "%", shell=True)
         if vol < 50 and playing == True:
