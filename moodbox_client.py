@@ -89,7 +89,7 @@ def get_volume_turn():
     time.sleep(0.001)
     return result
 
-y = 7 #initial volume
+y = 5 #initial volume
 
 def play():
     global playing
@@ -112,8 +112,8 @@ def set_channel(x):
         urlopen(req)
 
 def set_volume(y):
-    if y >= -10 or y <= 10:
-    	vol = scale(y, (-10.0, +10.0), (+0.0, +100.0))
+    if y >= -8 or y <= 8:
+    	vol = scale(y, (-8.0, +8.0), (+0.0, +100.0))
         call("amixer set PCM " + `vol` + "%", shell=True)
         if vol < 50 and playing == True:
             pause()
