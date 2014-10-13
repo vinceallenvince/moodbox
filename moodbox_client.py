@@ -14,6 +14,7 @@ current_channel = False
 status_check_count = 0
 status_check_max = 200
 fetching_new_tracks = False
+playing = False
 
 ###################
 
@@ -91,7 +92,15 @@ def get_volume_turn():
 y = 15 #initial volume
 
 def play():
+    global playing
+    playing = True
     req = Request(base_client_uri + "/action?action=play")
+    urlopen(req)
+
+def pause():
+    global playing
+    playing = False
+    req = Request(base_client_uri + "/action?action=pause")
     urlopen(req)
 
 def set_channel(x):
@@ -106,6 +115,10 @@ def set_volume(y):
     if y >= -25 or y <= 25:
     	vol = scale(y, (-25.0, +25.0), (+0.0, +100.0))
         call("amixer set PCM " + `vol` + "%", shell=True)
+        if vol < 50 and playing == True
+            pause()
+        elif vol >= 50 and playing == False
+            play()
 
 def set_max_connect_volume():
     req = Request(base_client_uri + "/action?action=volume&level=65535")
