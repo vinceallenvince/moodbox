@@ -73,8 +73,6 @@ GPIO.setup(input_volume_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 old_volume_a = True
 old_volume_b = True
 
-init_volume_val = 25
-
 def get_volume_turn():
     # return -1, 0, or +1
     global old_volume_a, old_volume_b
@@ -90,7 +88,7 @@ def get_volume_turn():
     time.sleep(0.001)
     return result
 
-y = 0
+y = 15 #initial volume
 
 def play():
     req = Request(base_client_uri + "/action?action=play")
@@ -105,8 +103,8 @@ def set_channel(x):
         urlopen(req)
 
 def set_volume(y):
-    vol = scale(y, (0.0, +10.0), (+50.0, +100.0)) + init_volume_val
-    if vol <= 100 and vol >= 0:
+    if y >= -25 or y <= 25:
+    	vol = scale(y, (-25.0, +25.0), (+0.0, +100.0))
         call("amixer set PCM " + `vol` + "%", shell=True)
 
 def set_max_connect_volume():
@@ -180,7 +178,7 @@ def check_ready():
             ready = True
             led_on()
             set_max_connect_volume() # max the Spotify connect volume
-            set_volume(0)
+            set_volume(y)
             set_channel(0) # range is -2 -> 2
             play()
 
