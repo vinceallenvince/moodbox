@@ -115,9 +115,9 @@ def set_volume(y):
     if y >= -25 or y <= 25:
     	vol = scale(y, (-25.0, +25.0), (+0.0, +100.0))
         call("amixer set PCM " + `vol` + "%", shell=True)
-        if vol < 50 and playing == True
+        if vol < 50 and playing == True:
             pause()
-        elif vol >= 50 and playing == False
+        elif vol >= 50 and playing == False:
             play()
 
 def set_max_connect_volume():
